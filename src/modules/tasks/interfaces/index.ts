@@ -6,12 +6,13 @@ export interface CreateTaskProps {
 }
 
 export interface UpdateTaskProps extends Partial<CreateTaskProps> {
+  id: string;
   status?: TaskStatus;
 }
 
 export interface DatabaseTasksRepository {
   create: (task: CreateTaskProps) => Promise<Tasks>;
   findAll: () => Promise<Tasks[]>;
-  update: (id: string, task: UpdateTaskProps) => Promise<Tasks>;
+  update: (task: UpdateTaskProps) => Promise<Tasks>;
   delete: (id: string) => Promise<Tasks>;
 }
