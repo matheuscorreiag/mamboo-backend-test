@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import {
   createTaskController,
+  deleteTaskController,
   findAllTasksController,
   updateTaskController,
 } from "./modules/tasks";
@@ -17,6 +18,10 @@ routes.get("/tasks", (request: Request, response: Response) =>
 
 routes.put("/tasks/:id", (request: Request, response: Response) =>
   updateTaskController.handle(request, response)
+);
+
+routes.delete("/tasks/:id", (request: Request, response: Response) =>
+  deleteTaskController.handle(request, response)
 );
 
 export { routes };
