@@ -6,9 +6,11 @@ export class UpdateTaskController {
   constructor(private updateTaskUseCase: UpdateTaskUseCase) {}
 
   async handle(request: Request, response: Response) {
-    const { title, description, status, id } = UpdateTaskDto.parse(
-      request.body
-    );
+    const { id } = request.params;
+    const { title, description, status } = UpdateTaskDto.parse({
+      ...request.body,
+      id,
+    });
 
     const task = await this.updateTaskUseCase.execute({
       id,
