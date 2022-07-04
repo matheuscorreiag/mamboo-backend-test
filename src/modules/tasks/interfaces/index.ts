@@ -4,6 +4,7 @@ import { QueryTasksProps } from "../useCases/FindAllTasks.useCase";
 export interface CreateTaskProps {
   title: string;
   description: string;
+  status: TaskStatus;
 }
 
 export interface UpdateTaskProps extends Partial<CreateTaskProps> {

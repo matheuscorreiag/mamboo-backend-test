@@ -6,11 +6,12 @@ export class CreateTaskController {
   constructor(private createTaskUseCase: CreateTaskUseCase) {}
 
   async handle(request: Request, response: Response) {
-    const { title, description } = CreateTaskDto.parse(request.body);
+    const { title, description, status } = CreateTaskDto.parse(request.body);
 
     const task = await this.createTaskUseCase.execute({
       title,
       description,
+      status
     });
 
     return response.status(201).send(task);

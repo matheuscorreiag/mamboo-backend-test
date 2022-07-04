@@ -8,11 +8,16 @@ import {
 import { QueryTasksProps } from "../tasks/useCases/FindAllTasks.useCase";
 
 export class PrismaTasksRepository implements DatabaseTasksRepository {
-  async create({ title, description }: CreateTaskProps): Promise<Tasks> {
+  async create({
+    title,
+    description,
+    status,
+  }: CreateTaskProps): Promise<Tasks> {
     const task = await prisma.tasks.create({
       data: {
         title,
         description,
+        status,
       },
     });
 
