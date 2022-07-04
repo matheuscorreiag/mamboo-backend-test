@@ -1,10 +1,11 @@
-import { Tasks } from "@prisma/client";
+import { Tasks, TaskStatus } from "@prisma/client";
 import prisma from "../../database";
 import {
   CreateTaskProps,
   DatabaseTasksRepository,
   UpdateTaskProps,
 } from "../tasks/interfaces";
+import { QueryTasksProps } from "../tasks/useCases/FindAllTasks.useCase";
 
 export class PrismaTasksRepository implements DatabaseTasksRepository {
   async create({ title, description }: CreateTaskProps): Promise<Tasks> {
@@ -18,8 +19,12 @@ export class PrismaTasksRepository implements DatabaseTasksRepository {
     return task;
   }
 
-  async findAll(): Promise<Tasks[]> {
-    const tasks = await prisma.tasks.findMany();
+  async findAll({ status }: QueryTasksProps): Promise<Tasks[]> {
+    const tasks = await prisma.tasks.findMany({
+      where: {
+        status: status as TaskStatus,
+      },
+    });
 
     return tasks;
   }

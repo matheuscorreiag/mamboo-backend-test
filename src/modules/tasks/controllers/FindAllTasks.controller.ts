@@ -5,7 +5,8 @@ export class FindAllTasksController {
   constructor(private findAllTasksUseCase: FindAllTasksUseCase) {}
 
   async handle(request: Request, response: Response) {
-    const tasks = await this.findAllTasksUseCase.execute();
+    const query = request.query;
+    const tasks = await this.findAllTasksUseCase.execute(query);
 
     return response.status(200).send(tasks);
   }

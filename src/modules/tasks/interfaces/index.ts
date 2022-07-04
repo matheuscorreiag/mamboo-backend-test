@@ -1,4 +1,5 @@
 import { Tasks, TaskStatus } from "@prisma/client";
+import { QueryTasksProps } from "../useCases/FindAllTasks.useCase";
 
 export interface CreateTaskProps {
   title: string;
@@ -12,7 +13,7 @@ export interface UpdateTaskProps extends Partial<CreateTaskProps> {
 
 export interface DatabaseTasksRepository {
   create: (task: CreateTaskProps) => Promise<Tasks>;
-  findAll: () => Promise<Tasks[]>;
+  findAll: (query: QueryTasksProps) => Promise<Tasks[]>;
   update: (task: UpdateTaskProps) => Promise<Tasks>;
   delete: (id: string) => Promise<Tasks>;
 }

@@ -1,10 +1,14 @@
+import { TaskStatus } from "@prisma/client";
 import { DatabaseTasksRepository } from "../interfaces";
 
+export interface QueryTasksProps {
+  status?: TaskStatus | undefined;
+}
 export class FindAllTasksUseCase {
   constructor(private databaseTasksRepository: DatabaseTasksRepository) {}
 
-  async execute() {
-    const tasks = await this.databaseTasksRepository.findAll();
+  async execute(query: QueryTasksProps) {
+    const tasks = await this.databaseTasksRepository.findAll(query);
 
     return tasks;
   }
