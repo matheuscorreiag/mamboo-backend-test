@@ -8,14 +8,9 @@ import {
 import { QueryTasksProps } from "../tasks/useCases/FindAllTasks.useCase";
 
 export class PrismaTasksRepository implements DatabaseTasksRepository {
-  async create({
-    title,
-    description,
-    status,
-  }: CreateTaskProps): Promise<Tasks> {
+  async create({ description, status }: CreateTaskProps): Promise<Tasks> {
     const task = await prisma.tasks.create({
       data: {
-        title,
         description,
         status,
       },
@@ -34,18 +29,12 @@ export class PrismaTasksRepository implements DatabaseTasksRepository {
     return tasks;
   }
 
-  async update({
-    id,
-    title,
-    description,
-    status,
-  }: UpdateTaskProps): Promise<Tasks> {
+  async update({ id, description, status }: UpdateTaskProps): Promise<Tasks> {
     const task = await prisma.tasks.update({
       where: {
         id,
       },
       data: {
-        title: title || undefined,
         description: description || undefined,
         status: status || undefined,
       },

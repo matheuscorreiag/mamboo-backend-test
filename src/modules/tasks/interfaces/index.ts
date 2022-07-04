@@ -2,7 +2,6 @@ import { Tasks, TaskStatus } from "@prisma/client";
 import { QueryTasksProps } from "../useCases/FindAllTasks.useCase";
 
 export interface CreateTaskProps {
-  title: string;
   description: string;
   status: TaskStatus;
 }

@@ -19,7 +19,6 @@ enum TaskStatus {
 
 model Tasks {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
   description String
   status      TaskStatus @default(PENDING)
 }

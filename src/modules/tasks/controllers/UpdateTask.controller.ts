@@ -7,14 +7,13 @@ export class UpdateTaskController {
 
   async handle(request: Request, response: Response) {
     const { id } = request.params;
-    const { title, description, status } = UpdateTaskDto.parse({
+    const { description, status } = UpdateTaskDto.parse({
       ...request.body,
       id,
     });
 
     const task = await this.updateTaskUseCase.execute({
       id,
-      title,
       description,
       status,
     });
